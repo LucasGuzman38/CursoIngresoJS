@@ -3,38 +3,37 @@ Al presionar el botón pedir  números  hasta que el usuario quiera,
 mostrar el número máximo y el número mínimo ingresado.*/
 function mostrar()
 {
-	let numMax;
-	let numMin;
-	let num;
-	let respuesta;
+	let numero;
+	let numMin = 0;
+	let numMax = 0;
+	let seguir;
 	let flag = 0;
 
 	do{
-		num = parseInt(prompt("Ingrese un numero"));
-	
-		while(isNaN(num)){
-			num = parseInt(prompt("Ese no es un numero, por favor, vuelva a intentarlo"));
+		numero = parseInt(prompt("Por favor ingrese un numero"));
+
+		while(isNaN(numero)){
+			numero = parseInt(prompt("ERROR, numero no valido, por favor intentelo nuevamente"));
 		}
 
 		if(flag == 0){
 			console.log("Es la primera vez");
-			flag++;
-			numMax= num;
-			numMin= num;
+			numMax += numero;
+			numMin += numero;
+			flag = 1;
 		}
 		else{
 			console.log("No es la primera vez");
-			if(num > numMax){
-			numMax = num;
+			if(numero > numMax){
+				numMax = numero;
 			}
-				else if(num < numMin){
-					numMin = num;
-				}
+			else if(numero < numMin){
+				numMin = numero;
+			}
 		}
 
-
-		respuesta = prompt("Desea volver a ingresar un numero?");
-	}while(respuesta == "s");
+		seguir = prompt("Desea seguir?");
+	}while(seguir == "s");
 
 	document.getElementById("txtIdMaximo").value = numMax;
 	document.getElementById("txtIdMinimo").value = numMin;

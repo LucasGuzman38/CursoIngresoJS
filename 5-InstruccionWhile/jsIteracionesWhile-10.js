@@ -1,68 +1,50 @@
 function mostrar()
 {
-    let num;
+    let numero;
+    let seguir;
     let acumPos = 0;
     let acumNeg = 0;
-    let contaPos = 0;
-    let contaNeg = 0;
-    let contaCero = 0;
-    let contaPar = 0;
-    let flagP = 1;
-    let flagN = 1;
-    let promPos = 0;
-    let promNeg = 0;
-    let dif;
+    let contadorPares = 0;
+    let contadorCeros = 0;
+    let contadorPos = 0;
+    let contadorNeg = 0;
+    let diferencia;
+
 
     do{
-        num= parseInt(prompt("Porfavor, ingrese un numero."));
+        numero = parseInt(prompt("Por favor ingrese un numero"));
 
-        while(isNaN(num)){
-            num = prompt("Eso no es un numero, porfavor, intentelo nuevamente.");
+        while(isNaN(numero)){
+            numero = parseInt(prompt("ERROR, por favor intentelo nuevamente"));
         }
 
-        if(num > 0){
-            console.log("Es positivo");
-            acumPos += num;
-            contaPos++;
-            flagP = 0;
-        }
-        else if(num < 0){
-            console.log("Es negativo");
-            acumNeg += num;
-            contaNeg++;
-            flagN = 0;
+        if(numero > 0){
+            acumPos += numero;
+            contadorPos++;
+        } else if(numero < 0){
+            acumNeg += numero;
+            contadorNeg++;
         }
         else{
-            console.log("Es un cero");
-            contaCero++;
-
-        }
-        if(num % 2 == 0){
-            contaPar++;
+            contadorCeros++;
         }
 
-        pregunta = prompt("Continuamos?");
-    }while(pregunta == "s");
+        if(numero % 2 == 0){
+            contadorPares++;
+        }
 
-    if(flagP == 0){
-        promPos = acumPos/contaPos;
-        alert("El promedio de positivos es " + promPos);
-    }
-    if(flagN == 0){
-        promNeg = acumNeg/contaNeg;  
-        alert("El promedio de negativos es " + promNeg);
-    }
+        diferencia = contadorPos - contadorNeg;
 
-    dif = contaPos-contaNeg;
+        seguir = prompt("Desea seguir ingresando numeros? s/n").toLowerCase();
+    }while(seguir == "s");
 
-    alert("La suma de los negativos es: " + acumNeg);
     alert("La suma de los positivos es: " + acumPos);
-    alert("La cantidad de positivos es: " + contaPos);
-    alert("La cantidad de negativos es: " + contaNeg);
-    alert("La cantidad de ceros es: " + contaCero);
-    alert("La cantidad de pares es: " + contaPar);
-    alert("El promedio de positivos es: " + promPos);
-    alert("El promedio de negativos es: " + promNeg);
-    alert("La diferencia entre positivos y negativos es: " + dif);
-
+    alert("La suma de los negativos es: " + acumNeg);
+    alert("La cantidad de positivos es: " + contadorPos);
+    alert("La cantidad de negativos es: " + contadorNeg);
+    alert("La cantidad de ceros es: " + contadorCeros);
+    alert("La cantidad de numeros pares es: " + contadorPares);
+    alert("El promedio de los positivos es: " + acumPos/contadorPos);
+    alert("El promedio de los negativos es: " + acumNeg/contadorNeg);
+    alert("La diferencia entre positivos y negativos es de: " + diferencia);
 }
