@@ -1,15 +1,32 @@
 function mostrar()
+
+/*
+1) tipo (arena, cal, cemento), cantidad de bolsas, precio por bolsa > 0
+
+a) el importe a pagar bruto
+b) el importe a pagar con descuento
+c) informar el tipo con mas bolsas
+d) el tipo mas caro
+
+Variable a declarar: tipo, cantidad, precioPorBolsa, PrecioBruto, PrecioDesc, acumBolsas, tipoMaxCaro.
+*/
 {
   let tipo;
-  let bolsas;
-  let seguir;
-  let contadorBolsas = 0;
-  let precio;
-  let importeBruto = 0;
-  let importeDesc = 0;
+  let cantidad;
+  let precioPorBolsa;
+  let precioDesc;
   let tipoMasBolsas;
+  let precioArena = 0;
+  let precioCemento = 0;
+  let precioCal = 0;
   let tipoMasCaro;
-
+  let acumArenaBolsas = 0;
+  let acumCemenBolsas = 0;
+  let acumCalBolsas = 0;
+  let contArenaBolsas = 0;
+  let contCemenBolsas = 0;
+  let contCalBolsas = 0;
+  let cuenta;
 
   do{
 
@@ -19,32 +36,63 @@ function mostrar()
       tipo = prompt("ERROR, tipo invalido, intentelo nuevamente (cemento, arena, cal)");
     }
 
-    bolsas = parseInt(prompt("Por favor ingrese la cantidad de bolsas"));
+    cantidad = parseInt(prompt("Por favor ingrese la cantidad de bolsas"));
     
-    while(isNaN(bolsas) || bolsas <= 0){
-      bolsas = parseInt(prompt("ERROR, cantidad invalida, intentelo nuevamente"));
+    while(isNaN(cantidad) || cantidad <= 0){
+      cantidad = parseInt(prompt("ERROR, cantidad invalida, intentelo nuevamente"));
     }
 
-    precio = parseInt(prompt("Por favor ingrese el precio"));
+    precioPorBolsa = parseInt(prompt("Por favor ingrese el precio"));
 
-    if(precio < 0){
-      precio = parseInt(prompt("ERROR, precio invalido, por favor intentelo nuevamente"));
+    if(precioPorBolsa < 0){
+      precioPorBolsa = parseInt(prompt("ERROR, precio invalido, por favor intentelo nuevamente"));
     }
 
-    console.log(tipo);
-    console.log(bolsas);
-    console.log(precio);
+    if(tipo == "arena"){
+      acumArenaBolsas = cantidad + acumArenaBolsas;
+      contArenaBolsas++;
+      precioArena = precioPorBolsa + precioArena;
+    } else if(tipo == "cal"){
+      acumCalBolsas = cantidad + acumCalBolsas;
+      contCalBolsas++;
+      precioCal= cantidad + precioCal;
+    } else{
+      acumCemenBolsas = cantidad + acumCemenBolsas;
+      contCemenBolsas++;
+      precioCemento = precioPorBolsa + precioCemento;
+    }
 
   seguir = prompt("Desea ingresar otro producto? s/n");
   }while(seguir == "s");
 
-  if(bolsas > 10){
-    importeDesc = precio * 1.15;
-    importeBruto += precio;
+  if(acumArenaBolsas > acumCemenBolsas && acumArenaBolsas > acumCalBolsas){
+    tipoMasBolsas = "Arena";
+  } else if(acumCalBolsas >= acumArenaBolsas && acumCalBolsas > acumCemenBolsas){
+    tipoMasBolsas = "Cal";
+  }else{
+    tipoMasBolsas = "Cemento";
   }
-  if(bolsas > 30){
-    importeDesc = precio * 1.25;
-    importeBruto += precio;
+
+  if(precioArena > precioCal && precioArena > precioCemento){
+    tipoMasCaro = "Arena";
+  } else if(precioCal > precioArena && precioCal > precioCemento){
+    tipoMasCaro = "Cal";
+  }else{
+    tipoMasCaro = "Cemento";
   }
-  console.log(importeDesc);
+
+
+  alert("El importe bruto es: " + precioPorBolsa);
+
+  if(cantidad > 10){
+      cuenta = precioPorBolsa * 0.15;
+      precioDesc = precioPorBolsa - cuenta;
+      alert("El importe con descuento es: " + precioDesc)
+  } else if(cantidad > 30){
+      cuenta = precioPorBolsa * 0.25;
+      precioDesc = precioPorBolsa - cuenta;
+    alert("El importe con descuento es: " + precioDesc);
+    }
+  alert("El tipo con mas cantidad de bolsas es: " + tipoMasBolsas);
+  alert("El tipo mas caro: " + tipoMasCaro);
 }
